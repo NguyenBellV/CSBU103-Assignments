@@ -1,0 +1,31 @@
+.header {
+  background-color: #002b80; /* xanh đậm */
+  color: white;
+  padding: 20px 40px;
+  border-radius: 10px;
+  width: 80%;
+  margin: 30px auto;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header .container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header .icon {
+  font-size: 40px;
+}
+
+.header .text h1 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.header .text p {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.9;
+}
