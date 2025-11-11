@@ -3,17 +3,11 @@ import "./FormSection.css";
 
 function FormSection() {
   const [formData, setFormData] = useState({
-    lastName: "",
-    middleAndFirstName: "",
     fullName: "",
     email: "",
     phone: "",
     addressFrom: "",
     addressTo: "",
-    cityFrom: "",
-    cityTo: "",
-    districtFrom: "",
-    districtTo: "",
   });
 
   // Handle input change
@@ -30,12 +24,6 @@ function FormSection() {
     alert("Đã gửi đơn thành công!");
   };
 
-  const fullNameCalculated = (
-    formData.lastName +
-    " " +
-    formData.middleAndFirstName
-  ).trim();
-
   return (
     <section className="form-section">
       <h2>Nhập Thông Tin</h2>
@@ -44,37 +32,13 @@ function FormSection() {
       <form onSubmit={handleSubmit}>
         <div className="form-name">
           <label>
-            Họ<span>*</span>
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Nhập họ"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-          </label>
-
-          <label>
-            Tên đệm và Tên <span>*</span>
-            <input
-              type="text"
-              name="middleAndFirstName"
-              placeholder="Nhập tên đệm và tên"
-              value={formData.middleAndFirstName}
-              onChange={handleChange}
-              required
-            />
-          </label>
-
-          <label>
             Họ và Tên <span>*</span>
             <input
               type="text"
               name="fullName"
               placeholder="Họ và tên"
-              value={fullNameCalculated} //Gán value đã được tính toán
-              readOnly //Người dùng không thể chỉnh sửa trực tiếp
+              value={formData.fullName}
+              onChange={handleChange}
               required
             />
           </label>
@@ -116,32 +80,6 @@ function FormSection() {
           />
         </label>
 
-        <div className="form-row">
-          <label>
-            Thành Phố <span>*</span>
-            <input
-              type="text"
-              name="cityFrom"
-              placeholder="Nhập thành phố"
-              value={formData.cityFrom}
-              onChange={handleChange}
-              required
-            />
-          </label>
-
-          <label>
-            Quận/Huyện <span>*</span>
-            <input
-              type="text"
-              name="districtFrom"
-              placeholder="Nhập quận/huyện"
-              value={formData.districtFrom}
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </div>
-
         <label>
           Địa chỉ người nhận/ To <span>*</span>
           <input
@@ -154,31 +92,6 @@ function FormSection() {
           />
         </label>
 
-        <div className="form-row">
-          <label>
-            Thành Phố <span>*</span>
-            <input
-              type="text"
-              name="cityTo"
-              placeholder="Nhập thành phố"
-              value={formData.cityTo}
-              onChange={handleChange}
-              required
-            />
-          </label>
-
-          <label>
-            Quận/Huyện <span>*</span>
-            <input
-              type="text"
-              name="districtTo"
-              placeholder="Nhập quận/huyện"
-              value={formData.districtTo}
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </div>
         <button type="submit" className="submit-btn">
           Gửi Đơn
         </button>
