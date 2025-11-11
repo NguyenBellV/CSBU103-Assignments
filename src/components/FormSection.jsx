@@ -8,9 +8,12 @@ function FormSection() {
     fullName: "",
     email: "",
     phone: "",
-    address: "",
-    city: "",
-    district: "",
+    addressFrom: "",
+    addressTo: "",
+    cityFrom: "",
+    cityTo: "",
+    districtFrom: "",
+    districtTo: "",
   });
 
   // Handle input change
@@ -105,9 +108,9 @@ function FormSection() {
           Địa chỉ người gửi/ From <span>*</span>
           <input
             type="text"
-            name="address"
+            name="addressFrom"
             placeholder="Nhập địa chỉ"
-            value={formData.address}
+            value={formData.addressFrom}
             onChange={handleChange}
             required
           />
@@ -118,9 +121,9 @@ function FormSection() {
             Thành Phố <span>*</span>
             <input
               type="text"
-              name="city"
+              name="cityFrom"
               placeholder="Nhập thành phố"
-              value={formData.city}
+              value={formData.cityFrom}
               onChange={handleChange}
               required
             />
@@ -130,9 +133,9 @@ function FormSection() {
             Quận/Huyện <span>*</span>
             <input
               type="text"
-              name="district"
+              name="districtFrom"
               placeholder="Nhập quận/huyện"
-              value={formData.district}
+              value={formData.districtFrom}
               onChange={handleChange}
               required
             />
@@ -143,9 +146,9 @@ function FormSection() {
           Địa chỉ người nhận/ To <span>*</span>
           <input
             type="text"
-            name="address"
+            name="addressTo"
             placeholder="Nhập địa chỉ"
-            value={formData.address}
+            value={formData.addressTo}
             onChange={handleChange}
             required
           />
@@ -156,9 +159,9 @@ function FormSection() {
             Thành Phố <span>*</span>
             <input
               type="text"
-              name="city"
+              name="cityTo"
               placeholder="Nhập thành phố"
-              value={formData.city}
+              value={formData.cityTo}
               onChange={handleChange}
               required
             />
@@ -168,15 +171,14 @@ function FormSection() {
             Quận/Huyện <span>*</span>
             <input
               type="text"
-              name="district"
+              name="districtTo"
               placeholder="Nhập quận/huyện"
-              value={formData.district}
+              value={formData.districtTo}
               onChange={handleChange}
               required
             />
           </label>
         </div>
-
         <button type="submit" className="submit-btn">
           Gửi Đơn
         </button>

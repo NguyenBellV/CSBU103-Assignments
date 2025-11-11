@@ -1,7 +1,8 @@
 /* src/components/FormSection.css */
 .form-section {
   background-color: white;
-  width: 80%;
+  width: 100%;
+  max-width: 800px;
   margin: 20px auto;
   padding: 30px 40px;
   border-radius: 10px;
@@ -32,7 +33,6 @@ label span {
 input {
   width: 95%;
   padding: 10px 12px;
-  margin: 5px;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 14px;
@@ -44,23 +44,16 @@ input:focus {
   box-shadow: 0px 0px 3px #002b80;
 }
 
-.form-name {
-  display: flex;
-  gap: 40px;
-  justify-content: space-between;
-  width: 97%;
-}
-
-.form-name * {
-  flex: 1;
-}
-
+.form-name,
 .form-row {
   display: flex;
-  gap: 40px;
+  gap: 20px;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.form-row label {
+.form-name *,
+.form-row * {
   flex: 1;
 }
 
