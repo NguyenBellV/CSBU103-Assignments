@@ -30,19 +30,17 @@ function FormSection() {
       <p>Vui lòng điền đầy đủ thông tin dưới đây theo biểu mẫu</p>
 
       <form onSubmit={handleSubmit}>
-        <div className="form-name">
-          <label>
-            Họ và Tên <span>*</span>
-            <input
-              type="text"
-              name="fullName"
-              placeholder="Họ và tên"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </div>
+        <label>
+          Họ và Tên <span>*</span>
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Họ và tên"
+            value={formData.fullName}
+            onChange={handleChange}
+            required
+          />
+        </label>
 
         <label>
           Email <span>*</span>
