@@ -6,25 +6,24 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="home-container">
       <header>
-        <h1>VTP Express</h1>
-        <p>Vận chuyển hàng hoá trong nước - quốc tế</p>
+        <h3>VTP Express</h3>
+        <p>
+          Vận chuyển hàng hoá trong nước - quốc tế
+          <br /> Chọn loại dịch vụ bạn muốn sử dụng
+        </p>
       </header>
 
-      <main className="home-main">
-        <h2>Chọn dịch vụ</h2>
-
+      <main>
         <div className="home-options">
           <button
             className="home-option-btn"
-            onClick={() => navigate("/dosmetic")}
+            onClick={() => navigate("/domestic")}
           >
             🚚 Ký gửi hàng trong nước
           </button>
-        </div>
 
-        <div>
           <button
             className="home-option-btn"
             onClick={() => navigate("/international")}
@@ -33,6 +32,13 @@ export default function Home() {
           </button>
         </div>
       </main>
+      <div className="notice">
+        <h4>THÔNG BÁO TỪ HỆ THỐNG:</h4>
+        <p>
+          Khi đăng nhập các thông tin cá nhân (Họ và tên, ngày sinh, giới tính,
+          số điện thoại,...) sẽ được bảo mật an toàn!!!
+        </p>
+      </div>
     </div>
   );
 }
