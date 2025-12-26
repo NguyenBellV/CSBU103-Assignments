@@ -1,63 +1,100 @@
-/* Home page styles */
 .home-container {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid rgb(177, 177, 177);
-  border-radius: 5px;
-  align-items: center;
-  max-width: 800px;
-  width: 90%;
+  max-width: 900px;
   margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+/* Header */
+.home-header h3 {
+  font-size: 2.5rem;
+  color: #002b80;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.sub-title {
+  color: #555;
+  line-height: 1.6;
+}
+
+.sub-title span {
+  font-weight: bold;
+  color: #333;
 }
 
 .home-options {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  align-items: center;
-  margin: 10px 0 0;
-  padding: 10px 20px;
-  font-size: 16px;
+  gap: 30px;
+  margin: 50px 0;
+  flex-wrap: wrap;
 }
 
-.home-container h3 {
-  margin-bottom: 5px;
+.option-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
 }
 
 .home-option-btn {
-  border-radius: 15px;
-  margin: 10px;
+  width: 100%;
   padding: 20px;
-  width: 250px;
-  box-sizing: border-box;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-header p {
-  margin: 0;
-  color: rgb(57, 57, 255);
-}
-
-.notice {
-  border: none;
-  border-radius: 5px;
-  background-color: rgb(255, 255, 199);
-  margin: 20px 7%;
-  box-sizing: border-box;
-  text-align: left;
-  padding-left: 20px;
-}
-
-.notice h4 {
-  margin: 20px 0 2px;
+  font-size: 1.2rem;
   font-weight: bold;
-  font-style: italic;
-  font-size: 18px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border: 2px solid #002b80;
+  border-radius: 12px;
+  color: #002b80;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-.notice p {
-  margin-top: 0;
-  font-size: 15px;
-  margin-bottom: 20px;
+.home-option-btn:hover {
+  background-color: #002b80;
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 43, 128, 0.2);
+}
+
+.option-desc {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #666;
+  padding: 0 10px;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+.notice-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #eef2ff;
+  padding: 20px;
+  border-left: 5px solid #002b80;
+  border-radius: 8px;
+  margin-top: 40px;
+  text-align: left;
+}
+
+.notice-icon {
+  font-size: 40px;
+}
+
+.notice-content h4 {
+  margin: 0 0 5px 0;
+  color: #002b80;
+  font-size: 1rem;
+}
+
+.notice-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #444;
 }

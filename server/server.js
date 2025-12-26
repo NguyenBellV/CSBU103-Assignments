@@ -26,6 +26,9 @@ const ShipmentSchema = new mongoose.Schema({
   width: Number,
   height: Number,
   value: Number,
+  countryTo: String,
+  postcodeTo: String,
+  type: String,
   createdAt: { type: Date, default: Date.now }
 });
 
@@ -38,6 +41,7 @@ app.post('/api/shipments', async (req, res) => {
     await newShipment.save();
     res.status(201).json({ message: "Lưu đơn hàng thành công!" });
   } catch (error) {
+    console.log
     res.status(500).json({ error: "Lỗi khi lưu đơn hàng" });
   }
 });
