@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/Domestic.css";
 
 function Domestic() {
+  const navigate = useNavigate();
+
+  // Khởi tạo trạng thái form
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
     addressFrom: "",
     addressTo: "",
-    // Goods
     itemName: "",
     itemCategory: "Hàng thường",
     weight: "",
@@ -18,45 +21,35 @@ function Domestic() {
     value: "",
   });
 
-  // Handle input change
+  // Hàm xử lý thay đổi input
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle when Clicking Submit Button
+  // Hàm xử lý khi nhấn nút Gửi Đơn
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    // Gửi dữ liệu lên Backend
     fetch("http://localhost:5000/api/shipments", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Gửi dữ liệu thất bại!");
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
         }
-        return response.json(); // Chuyển dữ liệu phản hồi sang dạng JSON
+        throw new Error("Lỗi Server khi lưu dữ liệu");
       })
       .then((data) => {
-        // Xử lý khi thành công
         console.log("Thành công:", data);
-        alert("Đã gửi đơn hàng thành công và lưu vào MongoDB!");
         
-        // Reset form về trạng thái trống
-        setFormData({
-          fullName: "", email: "", phone: "",
-          addressFrom: "", addressTo: "",
-          itemName: "", itemCategory: "Hàng thường",
-          weight: "", value: "",
-          length: "", width: "", height: "",
-        });
+        // CHUYỂN TRANG: Sang trang Preview và đính kèm dữ liệu (state)
+        navigate("/preview", { state: { formData: formData } });
       })
       .catch((error) => {
-        // Xử lý khi có lỗi (lỗi mạng hoặc lỗi từ throw ở trên)
         console.error("Lỗi:", error);
         alert("Không thể kết nối tới Server. Vui lòng kiểm tra lại Backend!");
       });
@@ -64,27 +57,30 @@ function Domestic() {
 
   return (
     <section className="form-section">
-      <h2>Nhập Thông Tin</h2>
-      <p>Vui lòng điền đầy đủ thông tin dưới đây theo biểu mẫu</p>
+      <div className="form-header">
+        <h2>Ký Gửi Trong Nước</h2>
+        <p>Vui lòng điền đầy đủ thông tin dưới đây để tạo vận đơn</p>
+      </div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="shipping-form">
+        {/* THÔNG TIN LIÊN HỆ */}
         <div className="section-group">
           <h3>1. Thông tin liên hệ</h3>
-          <label>
-            Họ và Tên <span>*</span>
+          <div className="input-box">
+            <label>Họ và Tên <span>*</span></label>
             <input 
               type="text" 
               name="fullName" 
-              placeholder="Nguyen Van A" 
+              placeholder="Ví dụ: Nguyễn Văn A" 
               value={formData.fullName} 
               onChange={handleChange} 
               required
             />
-          </label>
+          </div>
 
           <div className="form-row">
-            <label>
-              Email <span>*</span>
+            <div className="input-box">
+              <label>Email <span>*</span></label>
               <input 
                 type="email" 
                 name="email" 
@@ -93,66 +89,68 @@ function Domestic() {
                 onChange={handleChange} 
                 required
               />
-            </label>
+            </div>
 
-            <label>
-              Số điện thoại <span>*</span>
+            <div className="input-box">
+              <label>Số điện thoại <span>*</span></label>
               <input 
                 type="tel" 
                 name="phone" 
-                placeholder="090..." 
+                placeholder="0901234567" 
                 value={formData.phone} 
                 onChange={handleChange} 
                 required
               />
-            </label>
+            </div>
           </div>
         </div>
 
-        <div>
+        {/* ĐỊA CHỈ */}
+        <div className="section-group">
           <h3>2. Địa chỉ giao hàng</h3>
-          <label>
-            Địa chỉ người gửi (From) <span>*</span>
+          <div className="input-box">
+            <label>Địa chỉ người gửi (From) <span>*</span></label>
             <input
               type="text"
               name="addressFrom"
-              placeholder="Số nhà, tên đường, phường..."
+              placeholder="Số nhà, tên đường, quận/huyện, tỉnh thành..."
               value={formData.addressFrom}
               onChange={handleChange}
               required
             />
-          </label>
+          </div>
 
-          <label>
-            Địa chỉ người nhận (To) <span>*</span>
+          <div className="input-box">
+            <label>Địa chỉ người nhận (To) <span>*</span></label>
             <input
               type="text"
               name="addressTo"
-              placeholder="Số nhà, tên đường, phường..."
+              placeholder="Địa chỉ chi tiết người nhận..."
               value={formData.addressTo}
               onChange={handleChange}
               required
             />
-          </label>
+          </div>
         </div>
         
+        {/* THÔNG TIN HÀNG HÓA */}
         <div className="section-group">
           <h3>3. Thông tin hàng hoá</h3>
           <div className="form-row">
-            <label>
-              Tên mặt hàng <span>*</span>
+            <div className="input-box">
+              <label>Tên mặt hàng <span>*</span></label>
               <input
                 type="text"
                 name="itemName"
-                placeholder="Tên mặt hàng"
+                placeholder="Ví dụ: Quần áo, Phụ kiện..."
                 value={formData.itemName}
                 onChange={handleChange}
                 required
               />
-            </label>
+            </div>
 
-            <label>
-              Loại hàng <span>*</span>
+            <div className="input-box">
+              <label>Loại hàng <span>*</span></label>
               <select
                 name="itemCategory"
                 value={formData.itemCategory}
@@ -164,12 +162,12 @@ function Domestic() {
                 <option value="Hàng giá trị cao">Hàng giá trị cao</option>
                 <option value="Thực phẩm">Thực phẩm</option>
               </select>
-            </label>
+            </div>
           </div>
 
           <div className="form-row">
-            <label>
-              Cân nặng - kg <span>*</span>
+            <div className="input-box">
+              <label>Cân nặng (kg) <span>*</span></label>
               <input
                 type="number"
                 name="weight"
@@ -179,10 +177,20 @@ function Domestic() {
                 onChange={handleChange}
                 required
               />
-            </label>
+            </div>
+            <div className="input-box">
+              <label>Giá trị hàng (VNĐ)</label>
+              <input
+                type="number"
+                name="value"
+                placeholder="Ví dụ: 500000"
+                value={formData.value}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
-          <p className="sub-label">Size (Length x Width x Height) - cm</p>
+          <p className="sub-label">Kích thước (Dài x Rộng x Cao) - cm</p>
           <div className="form-row-tri">
             <input type="number" name="length" placeholder="Dài" value={formData.length} onChange={handleChange} />
             <input type="number" name="width" placeholder="Rộng" value={formData.width} onChange={handleChange} />
@@ -191,7 +199,7 @@ function Domestic() {
         </div>
 
         <button type="submit" className="submit-btn">
-          Gửi Đơn
+          Xác nhận và Xem Preview
         </button>
       </form>
     </section>

@@ -1,0 +1,54 @@
+.admin-container { 
+    padding: 40px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.admin-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 20px; 
+    background: white; 
+}
+.admin-table th, .admin-table td { 
+  border: 1px solid #ddd; 
+  padding: 12px; 
+  text-align: left; 
+}
+
+.admin-table th { 
+    background-color: #002b80; 
+    color: white; 
+}
+
+.admin-table tr:nth-child(even) { 
+    background-color: #f9f9f9; 
+}
+
+/* Badge phân loại */
+.badge { 
+    padding: 4px 8px; 
+    border-radius: 4px; 
+    font-size: 0.8rem; 
+    font-weight: bold; 
+}
+
+.badge.dom { 
+    background: #e3f2fd; 
+    color: #1976d2; 
+}
+
+.badge.intl { 
+    background: #fff3e0; 
+    color: #f57c00; 
+}
+
+/* Nút xóa */
+.del-btn { 
+  background: #ff4d4d; color: white; border: none; 
+  padding: 6px 12px; border-radius: 4px; cursor: pointer; 
+}
+
+.del-btn:hover { 
+    background: #cc0000; 
+}

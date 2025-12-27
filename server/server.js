@@ -46,4 +46,24 @@ app.post('/api/shipments', async (req, res) => {
   }
 });
 
+// 1. Lấy tất cả đơn hàng từ MongoDB
+app.get('/api/shipments', async (req, res) => {
+  try {
+    const shipments = await Shipment.find().sort({ createdAt: -1 }); // Mới nhất hiện lên đầu
+    res.json(shipments);
+  } catch (error) {
+    res.status(500).json({ error: "Lỗi khi lấy dữ liệu" });
+  }
+});
+
+// 2. Xóa một đơn hàng theo ID
+app.delete('/api/shipments/:id', async (req, res) => {
+  try {
+    await Shipment.findByIdAndDelete(req.params.id);
+    res.json({ message: "Đã xóa đơn hàng thành công" });
+  } catch (error) {
+    res.status(500).json({ error: "Lỗi khi xóa đơn hàng" });
+  }
+});
+
 app.listen(5000, () => console.log("🚀 Server đang chạy tại port 5000"));
