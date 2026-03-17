@@ -2,16 +2,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const dns = require('dns');
+
+dns.setServers(['8.8.8.8', '8.8.4.4']); // Sử dụng DNS của Google
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-const mongoURI = "mongodb+srv://nguyen081104:Tringuyen0811@csbu103.ee8e10a.mongodb.net/shipmentDB?retryWrites=true&w=majority";
+const mongoURI = "mongodb+srv://nguyen081104:Tringuyen0811@csbu103.ee8e10a.mongodb.net/?appName=CSBU103";
 
 mongoose.connect(mongoURI)
-  .then(() => console.log("✅ Kết nối MongoDB thành công!"))
-  .catch(err => console.error("❌ Lỗi kết nối:", err));
+  .then(() => console.log("Kết nối MongoDB thành công!"))
+  .catch(err => console.error("Lỗi kết nối:", err));
 
 const ShipmentSchema = new mongoose.Schema({
   fullName: String,
@@ -41,7 +44,7 @@ app.post('/api/shipments', async (req, res) => {
     await newShipment.save();
     res.status(201).json({ message: "Lưu đơn hàng thành công!" });
   } catch (error) {
-    console.log
+    console.log("Lỗi khi lưu đơn hàng:", error);
     res.status(500).json({ error: "Lỗi khi lưu đơn hàng" });
   }
 });
@@ -66,4 +69,15 @@ app.delete('/api/shipments/:id', async (req, res) => {
   }
 });
 
-app.listen(5000, () => console.log("🚀 Server đang chạy tại port 5000"));
+// 3. Cập nhật một đơn hàng theo ID
+app.put('/api/shipments/:id', async (req, res) => {
+  try {
+    await Shipment.findByIdAndUpdate(req.params.id, req.body);
+    res.json({ message: "Cập nhật đơn hàng thành công" });
+  }
+  catch (error) {
+    res.status(500).json({ error: "Lỗi khi cập nhật đơn hàng" });
+  }
+});
+
+app.listen(5000, () => console.log('Server đang chạy tại port 5000'));
