@@ -69,15 +69,4 @@ app.delete('/api/shipments/:id', async (req, res) => {
   }
 });
 
-// 3. Cập nhật một đơn hàng theo ID
-app.put('/api/shipments/:id', async (req, res) => {
-  try {
-    await Shipment.findByIdAndUpdate(req.params.id, req.body);
-    res.json({ message: "Cập nhật đơn hàng thành công" });
-  }
-  catch (error) {
-    res.status(500).json({ error: "Lỗi khi cập nhật đơn hàng" });
-  }
-});
-
 app.listen(5000, () => console.log('Server đang chạy tại port 5000'));
